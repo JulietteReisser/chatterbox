@@ -1,0 +1,12 @@
+<div class="bubble-container" [ngClass]="{ 'own-message' : message.isOwnMessage }">
+	<img [src]="message.avatar" alt="Avatar" class="message-avatar" [ngClass]="{ 'hidden-avatar': !showHeader }">
+
+	<div>
+		<div class="message-author" *ngIf="showHeader">{{ message.author }}</div>
+
+		<div class="bubble-row">
+			<div class="message-content">{{ message.content }}</div>
+			<div class="message-timestamp" [class]="{ 'hidden-timestamp' : !showTimestamp }">{{ message.timestamp | date:'HH:mm' }}</div>
+		</div>
+	</div>
+</div>

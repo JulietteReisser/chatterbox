@@ -1,0 +1,78 @@
+.bubble-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.bubble-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.message-author {
+	text-align: left;
+	font-size: 0.8rem;
+	font-style: italic;
+	color: #555;
+
+	padding-left: 8px;
+}
+
+/* Circular profile picture */
+.message-avatar {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+
+}
+.hidden-avatar {
+	visibility: hidden;
+}
+
+.message-content {
+	padding: 0.5rem;
+	width: fit-content;
+
+	font-size: 0.9rem;
+	color: black;
+	background-color: #f8f8f8;
+	border-radius: 0 100px 100px 100px / 120px;
+
+	&:hover + .message-timestamp,
+	&:focus-within + .message-timestamp {
+		opacity: 1;
+	}
+}
+
+.message-timestamp {
+	font-size: 0.75rem;
+  color: #888;
+	white-space: nowrap;
+	align-self: flex-end;
+}
+.hidden-timestamp {
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out;
+}
+
+/* Adjustments for messages sent by the user */
+.own-message {
+	flex-direction: row-reverse;
+
+	.bubble-row {
+		flex-direction: row-reverse;
+	}
+
+	.message-author {
+		text-align: right;
+		padding-left: 0;
+		padding-right: 8px;
+	}
+
+	.message-content {
+		border-radius: 100px 0 100px 100px / 120px;
+		color: white;
+		background-color: #007aff;
+	}
+}

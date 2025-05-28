@@ -1,0 +1,25 @@
+<div class="chatroom">
+	<h2>Chat Room</h2>
+
+	<div class="messages" #messagesContainer>
+		<ng-container *ngFor="let message of messages; let i = index">
+			<div *ngIf="shouldShowDateHeader(i)" class="date-separator">
+				{{ getFormattedDate(message.timestamp) }}
+			</div>
+
+			<app-message
+				[message]="message"
+				[showHeader]="i === 0 || messages[i - 1].author !== message.author"
+				[showTimestamp]="shouldShowTimestamp(i)">
+			</app-message>
+		</ng-container>
+	</div>
+
+	<!-- Message input area -->
+	<div class="input-area">
+		<form class="input-area" (ngSubmit)="sendMessage()">
+			<input type="text" [(ngModel)]="newMessage" name="message" placeholder="Tape ton message..." required>
+			<button type="submit">Envoyer</button>
+		</form>
+	</div>
+</div>
