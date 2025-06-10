@@ -1,16 +1,81 @@
-<h2>Register</h2>
-<form (ngSubmit)="register()">
-  <label for="email">Email</label>
-  <input type="email" id="email" [(ngModel)]="email" name="email" required />
-  <br />
-
-  <label for="password">Password</label>
-  <input type="password" id="password" [(ngModel)]="password" name="password" required />
-  <br />
-
-	<label for="confirmPassword">Confirm Password</label>
-  <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required />
-  <br />
-
-  <button type="submit">Register</button>
-</form>
+<div class="container">
+	<div class="panel signup-panel">
+		<!-- Login panel -->
+		<div class="panel-left">
+			<h2>Hello</h2>
+			<p>Already have an account?</p>
+			<button routerLink="/login">Login</button>
+		</div>
+		<!-- Register panel -->
+		<div class="panel-right">
+			<h2>Sign Up</h2>
+			<form #registerForm="ngForm" (ngSubmit)="register()">
+				<div class="input-wrapper">
+					<input
+						type="email"
+						name="email"
+						placeholder="Email"
+						[(ngModel)]="email"
+						#emailInput="ngModel"
+						pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+						required />
+					<span
+						class="icon"
+						*ngIf="email" 
+						[ngClass]="{
+							'valid': emailInput.valid,
+							'invalid': !emailInput.valid && emailInput.touched }">
+							{{ emailInput.valid ? '✔' : '✖' }}
+					</span>
+				</div>
+				<div class="password-field">
+					<input
+						type="password"
+						name="password"
+						placeholder="Password"
+						[(ngModel)]="password"
+						#passwordInput="ngModel"
+						required />
+					<span
+						class="icon"
+						*ngIf="password" 
+						[ngClass]="{
+							'valid': isPasswordValid(),
+							'invalid': !isPasswordValid() && passwordInput.touched }">
+							{{ isPasswordValid() ? '✔' : '✖' }}
+					</span>
+					<span class="tooltip-container">
+						?
+						<div class="tooltip">
+							Password must be:
+							<ul>
+								<li>At least 8 characters</li>
+								<li>At least one uppercase letter</li>
+								<li>At least one lowercase letter</li>
+								<li>At least one number</li>
+							</ul>
+						</div>
+					</span>
+				</div>
+				<div class="input-wrapper">
+					<input
+						type="password"
+						name="confirmPassword"
+						placeholder="Comfirm Password"
+						[(ngModel)]="confirmPassword"
+						#confirmPasswordInput="ngModel"
+						required />
+					<span
+						class="icon"
+						*ngIf="confirmPassword" 
+						[ngClass]="{
+							'valid': doPasswordsMatch(),
+							'invalid': !doPasswordsMatch() && confirmPasswordInput.touched }">
+							{{ doPasswordsMatch() ? '✔' : '✖' }}
+					</span>
+				</div>
+				<button type="submit">Register</button>
+			</form>
+		</div>
+	</div>
+</div>
